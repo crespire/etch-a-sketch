@@ -22,7 +22,8 @@
  */
 
 /**
-window.addEventListener('mousemove', function (e){
+window.addEventListener('mousedown', function (e){
+    console.dir(e);
     if (e.target.classList[0] === 'pixel') { // Checks if the element is one we are looking to manipulate.
         console.dir(e);        
     }
@@ -57,3 +58,46 @@ document.documentElement.style.setProperty('--length', gridLength);
 
 // Add grid to our document.
 mainContainer.appendChild(drawArea);
+
+// Event Handler and Listener to draw
+function mouseDraw(event) {
+    /**
+    if (event.buttons === 1) {
+        if (event.target.classList[0] === 'pixel') { // Checks if the element is one we are looking to manipulate.
+            event.target.classList.add('flipped');
+        }
+    } */
+    if (event.target.classList[0] === 'pixel') { // Checks if the element is one we are looking to manipulate.
+        event.target.classList.add('flipped');
+    }
+}
+
+mainContainer.addEventListener('mousemove', mouseDraw);
+
+// Event handler and listener to reset grid
+function resetGrid(event) {
+    // Clear all children
+    mainContainer.textContent = '';
+
+    // Ask for a gridLength
+    gridLength = Number(prompt("What is the length of the grid you want to use? (Number between 16 and 100) "));
+
+    // If outside of bounds, set to boundary value, otherwise, keep user input.
+    if (gridLength > 100) {
+        gridLength = 100;
+    } else if (gridLength < 16) {
+        gridLength = 16;
+    }
+
+    // Make a new grid
+    drawArea = makeDrawArea(gridLength,gridLength,'pixel');
+
+     // Update the CSS varaible to match our draw area.
+    document.documentElement.style.setProperty('--length', gridLength);
+
+    // Add grid to our document.
+    mainContainer.appendChild(drawArea);
+}
+
+let clearButton = document.querySelector('#reset');
+clearButton.addEventListener('click', resetGrid);
