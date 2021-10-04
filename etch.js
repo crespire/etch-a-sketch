@@ -80,7 +80,7 @@ function resetGrid(event) {
     mainContainer.textContent = '';
 
     // Ask for a gridLength
-    gridLength = Number(prompt("What is the length of the grid you want to use? (Number between 16 and 100) "));
+    gridLength = Number(prompt("What is the length of the grid you want to use? (Number between 16 and 100)"));
 
     // If outside of bounds, set to boundary value, otherwise, keep user input.
     if (gridLength > 100) {
