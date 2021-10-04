@@ -1,0 +1,28 @@
+:root {
+    --length: 16; /* Set 16 as default, as that's the spec. This style is modified by etch.js */
+}
+
+.contentWrap {
+    display: flex;
+    justify-content: center;
+}
+
+.controls {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+}
+
+.mainContainer {
+    display: grid;
+    width: 940px;
+    height: 940px;
+    grid-template-rows: repeat(var(--length), 1fr);
+    grid-template-columns: repeat(var(--length), 1fr);
+    border: 1px black solid;
+}
+
+.pixel {
+    height: 1fr;
+    width: 1fr;
+}
