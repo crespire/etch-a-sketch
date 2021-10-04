@@ -1,4 +1,4 @@
-function makeDrawArea(x,y,strClass) {
+function makeDrawArea(x,strClass) {
     function makeCell(sClass) {
         let newDiv = document.createElement('div');
         newDiv.classList.add(sClass);
@@ -6,7 +6,8 @@ function makeDrawArea(x,y,strClass) {
     }
 
     let outputDiv = document.createElement('div');
-    let maxElements = x * y;
+    outputDiv.classList.add('mainContainer');
+    let maxElements = x ** 2;
 
     for (let i = 0; i < maxElements; i++) {
         outputDiv.appendChild(makeCell(strClass));
@@ -15,36 +16,36 @@ function makeDrawArea(x,y,strClass) {
     return outputDiv;
 }
 
-let mainContainer = document.querySelector('.mainContainer');
-let gridLength = 16;
-document.documentElement.style.setProperty('--length', gridLength);
-
 function mouseDraw(event) {
-    console.log(`Mouse moved`);
-    // let pixelDiv = event.target;
-    // pixelDiv.classList.add('flipped');
+    let pixelDiv = event.target;
+    if (pixelDiv.classList[0] === 'pixel') {
+        pixelDiv.classList.add('flipped');
     }
-
-mainContainer.appendChild(makeDrawArea(gridLength, gridLength, 'pixel'));
-let drawArea = document.querySelector('.mainContainer>div');
-console.dir(drawArea);
-drawArea.addEventListener('mousemove', mouseDraw);
-
-function resetGrid(event) {
-    mainContainer.textContent = '';
-
-    gridLength = Number(prompt("What is the length of the grid you want to use? (Number between 16 and 100)"));
-
-    if (gridLength > 100) {
-        gridLength = 100;
-    } else if (gridLength < 16) {
-        gridLength = 16;
-    }
-    
-    drawArea = makeDrawArea(gridLength,gridLength,'pixel');
-    document.documentElement.style.setProperty('--length', gridLength);
-    mainContainer.appendChild(drawArea);
 }
 
+function gridReset(event) {
+    if (gridLength > 0 ) {
+        contentWrapper.lastElementChild.remove();
+        gridLength = Number(prompt('New length? (16-100)'));
+
+        if (gridLength > 100) {
+            gridLength = 100;
+        } else if (gridLength < 16) {
+            gridLength = 16;
+        }        
+    } else {
+        gridLength = 16;
+    }
+    console.log(gridLength);
+    contentWrapper.appendChild(makeDrawArea(gridLength, 'pixel'));
+    document.documentElement.style.setProperty('--length', gridLength);
+    let drawArea = document.querySelector('.mainContainer');
+    drawArea.addEventListener('mousemove', mouseDraw);
+}
+
+let contentWrapper = document.querySelector('.contentWrap');
+let gridLength = 0;
 let clearButton = document.querySelector('#reset');
-clearButton.addEventListener('click', resetGrid);
+clearButton.addEventListener('click', gridReset);
+let initialGrid = new MouseEvent('click');
+clearButton.dispatchEvent(initialGrid);
