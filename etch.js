@@ -17,19 +17,17 @@ function makeDrawArea(x,y,strClass) {
 
 let mainContainer = document.querySelector('.mainContainer');
 let gridLength = 16;
-let drawArea = makeDrawArea(gridLength, gridLength, 'pixel');
-
 document.documentElement.style.setProperty('--length', gridLength);
 
-mainContainer.appendChild(drawArea);
-
 function mouseDraw(event) {
-    console.log(event);
-    if (event.target.classList[0] === 'pixel') {
-        event.target.classList.add('flipped');
+    console.log(`Mouse moved`);
+    // let pixelDiv = event.target;
+    // pixelDiv.classList.add('flipped');
     }
-}
 
+mainContainer.appendChild(makeDrawArea(gridLength, gridLength, 'pixel'));
+let drawArea = document.querySelector('.mainContainer>div');
+console.dir(drawArea);
 drawArea.addEventListener('mousemove', mouseDraw);
 
 function resetGrid(event) {
