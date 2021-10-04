@@ -36,7 +36,6 @@ function gridReset(event) {
     } else {
         gridLength = 16;
     }
-    console.log(gridLength);
     contentWrapper.appendChild(makeDrawArea(gridLength, 'pixel'));
     document.documentElement.style.setProperty('--length', gridLength);
     let drawArea = document.querySelector('.mainContainer');
