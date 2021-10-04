@@ -24,12 +24,13 @@ document.documentElement.style.setProperty('--length', gridLength);
 mainContainer.appendChild(drawArea);
 
 function mouseDraw(event) {
+    console.log(event);
     if (event.target.classList[0] === 'pixel') {
         event.target.classList.add('flipped');
     }
 }
 
-mainContainer.addEventListener('mousemove', mouseDraw);
+drawArea.addEventListener('mousemove', mouseDraw);
 
 function resetGrid(event) {
     mainContainer.textContent = '';
