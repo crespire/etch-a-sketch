@@ -5,7 +5,7 @@ function makeDrawArea(x,y,strClass) {
         return newDiv;
     }
 
-    let outputDiv = documentElement('div');
+    let outputDiv = document.createElement('div');
     let maxElements = x * y;
 
     for (let i = 0; i < maxElements; i++) {
