@@ -7,9 +7,8 @@ function makeDrawArea(x,strClass) {
 
     let outputDiv = document.createElement('div');
     outputDiv.classList.add('mainContainer');
-    let maxElements = x ** 2;
 
-    for (let i = 0; i < maxElements; i++) {
+    for (let i = 0; i < x ** 2; i++) {
         outputDiv.appendChild(makeCell(strClass));
     }
 
@@ -25,14 +24,15 @@ function mouseDraw(event) {
 
 function gridReset(event) {
     if (gridLength > 0 ) {
-        contentWrapper.lastElementChild.remove();
         gridLength = Number(prompt('New length? (16-100)'));
 
         if (gridLength > 100) {
             gridLength = 100;
         } else if (gridLength < 16) {
             gridLength = 16;
-        }        
+        }
+
+        contentWrapper.lastElementChild.remove();
     } else {
         gridLength = 16;
     }
@@ -42,9 +42,8 @@ function gridReset(event) {
     drawArea.addEventListener('mousemove', mouseDraw);
 }
 
-let contentWrapper = document.querySelector('.contentWrap');
+const contentWrapper = document.querySelector('.contentWrap');
+const clearButton = document.querySelector('#reset');
 let gridLength = 0;
-let clearButton = document.querySelector('#reset');
 clearButton.addEventListener('click', gridReset);
-let initialGrid = new MouseEvent('click');
-clearButton.dispatchEvent(initialGrid);
+clearButton.dispatchEvent(new MouseEvent('click'));
