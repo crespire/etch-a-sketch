@@ -22,7 +22,7 @@ function mouseDraw(event) {
     }
 }
 
-function gridReset(event) {
+function gridReset() {
     if (gridLength > 0 ) {
         gridLength = Number(prompt('New length? (16-100)'));
 
