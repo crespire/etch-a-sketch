@@ -46,4 +46,4 @@ const contentWrapper = document.querySelector('.contentWrap');
 const clearButton = document.querySelector('#reset');
 let gridLength = 0;
 clearButton.addEventListener('click', gridReset);
-clearButton.dispatchEvent(new MouseEvent('click'));
+resetGrid();
